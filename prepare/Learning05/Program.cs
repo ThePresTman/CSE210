@@ -1,9 +1,88 @@
 using System;
+using System.Collections.Generic;
 
-class Program
+// Base Shape class
+public abstract class Shape
 {
-    static void Main(string[] args)
+    private string _color;
+    
+    public Shape(string color)
     {
-        Console.WriteLine("Hello Learning05 World!");
+        _color = color;
+    }
+    
+    public string GetColor()
+    {
+        return _color;
+    }
+    
+    public abstract double GetArea();
+}
+
+// Square class
+public class Square : Shape
+{
+    private double _side;
+    
+    public Square(string color, double side) : base(color)
+    {
+        _side = side;
+    }
+    
+    public override double GetArea()
+    {
+        return _side * _side;
+    }
+}
+
+// Rectangle class
+public class Rectangle : Shape
+{
+    private double _width;
+    private double _height;
+    
+    public Rectangle(string color, double width, double height) : base(color)
+    {
+        _width = width;
+        _height = height;
+    }
+    
+    public override double GetArea()
+    {
+        return _width * _height;
+    }
+}
+
+// Circle class
+public class Circle : Shape
+{
+    private double _radius;
+    
+    public Circle(string color, double radius) : base(color)
+    {
+        _radius = radius;
+    }
+    
+    public override double GetArea()
+    {
+        return Math.PI * _radius * _radius;
+    }
+}
+
+// Main program
+public class Program
+{
+    public static void Main()
+    {
+        List<Shape> shapes = new List<Shape>();
+        
+        shapes.Add(new Square("Red", 4));
+        shapes.Add(new Rectangle("Blue", 5, 6));
+        shapes.Add(new Circle("Green", 3));
+        
+        foreach (Shape shape in shapes)
+        {
+            Console.WriteLine($"Shape Color: {shape.GetColor()}, Area: {shape.GetArea()}");
+        }
     }
 }
